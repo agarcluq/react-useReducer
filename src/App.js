@@ -17,14 +17,14 @@ export default function App() {
   const [totalTodo,dispatch]=useReducer(reducer, initialState);
   const [colorPosition,setColorPosition]=useState(0);
 
-  function addTodo(todo){
+  const addTodo=(todo)=>{
     setTodo([...todos,todo]);
     // setTotalTodo(totalTodo+1)
     dispatch('increment')
     document.getElementById("input-todo").value='';
   }
 
-  function deleteTodo(todo){
+  const deleteTodo=(todo)=>{
     var index=todos.indexOf(todo);
     todos.splice(index,1);
     setTodo([...todos])
