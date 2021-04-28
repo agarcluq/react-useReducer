@@ -68,7 +68,7 @@ export default function App() {
       <ul>
       {todos.map(todo =>(
         <div className="todoContainer">
-          <li className="todoItem" >{todo}</li>
+          <li className="todoItem" key={todo}>{todo}</li>
           {/* key={todo} */}
           <button className="todoButton" onClick={() => deleteTodo(todo)}>x</button>          
         </div>
