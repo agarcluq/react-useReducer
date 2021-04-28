@@ -1,15 +1,26 @@
-import React, {  useState, useEffect, useRef } from "react";
+import React, {  useState, useEffect, useReducer } from "react";
 import "./style.css";
 
+const initialState = 0;
+const reducer = (state, action) => {
+  switch (action) {
+    case 'increment': return state + 1;
+    case 'decrement': return state - 1;
+    case 'reset': return 0;
+    default: throw new Error('Unexpected action');
+  }
+};
 
 export default function App() {
 
   const [todos,setTodo]=useState([])
-  const [totalTodo,setTotalTodo]=useState(0)
-  const [colorPosition,setColorPosition]=useState(0)
+  const [totalTodo,dispatch]=useReducer(reducer, initialState);
+  const [colorPosition,setColorPosition]=useState(0);
+
   function addTodo(todo){
     setTodo([...todos,todo]);
-    setTotalTodo(totalTodo+1)
+    // setTotalTodo(totalTodo+1)
+    dispatch('increment')
     document.getElementById("input-todo").value='';
   }
 
@@ -17,7 +28,8 @@ export default function App() {
     var index=todos.indexOf(todo);
     todos.splice(index,1);
     setTodo([...todos])
-    setTotalTodo(totalTodo-1)
+    // setTotalTodo(totalTodo-1)
+    dispatch('decrement')
   }
   
   // Cuando cambia el total
