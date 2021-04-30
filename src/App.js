@@ -1,4 +1,4 @@
-import React, {  useState, useEffect, useReducer } from "react";
+import React, {  useState, useEffect, useReducer, useRef } from "react";
 import "./style.css";
 /**
  * Hook tipo reducer para aumentar o reducir
@@ -21,12 +21,14 @@ export default function App() {
   const [totalTodo,dispatch]=useReducer(reducer, initialState);
    // Posición de los colores
   const [colorPosition,setColorPosition]=useState(0);
+  // Optener valor input/ acceder
+  const inputTodo = useRef()
 
-  // Añadir artículo
+  // Método Añadir artículo
   const addTodo=(todo)=>{
     setTodo([...todos,todo]);
     dispatch('increment')
-    document.getElementById("input-todo").value='';
+    inputTodo.current.value='';
   }
 
   // Eliminar artículo
@@ -63,9 +65,9 @@ export default function App() {
   return (
     <div className="app">
     <h2>Mi lista de la compra🛒</h2>
-      <input type="text" id="input-todo"/>
+      <input ref={inputTodo} type="text" />
       <button 
-      onClick={() => {addTodo(document.getElementById("input-todo").value)}}>
+      onClick={() => {addTodo(inputTodo.current.value)}}>
       Añadir artículo</button>
       <p >Has añadido <span id="total">{totalTodo}</span> artículos</p>
 
