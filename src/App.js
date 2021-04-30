@@ -72,9 +72,9 @@ export default function App() {
       <p >Has añadido <span id="total">{totalTodo}</span> artículos</p>
 
       <ul>
-      {todos.map(todo =>(
+      {todos.map((todo,index) =>(
         <div className="todoContainer">
-          <li className="todoItem" key={todo}>{todo}</li>
+          <li className="todoItem" key={index}>{todo}</li>
           <button className="todoButton" onClick={() => deleteTodo(todo)}>x</button>          
         </div>
         ))}
